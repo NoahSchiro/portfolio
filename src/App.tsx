@@ -1,31 +1,53 @@
-import Container from '@mui/material/Container'
-import Typography from '@mui/material/Typography'
+import { useState } from 'react'
+import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
+import Container from '@mui/material/Container'
+import CssBaseline from '@mui/material/CssBaseline'
+import Tab from '@mui/material/Tab'
+import Tabs from '@mui/material/Tabs'
+import Toolbar from '@mui/material/Toolbar'
+import Home from './pages/Home'
+import Education from './pages/Education'
+import Work from './pages/Work'
+import Projects from './pages/Projects'
+import Footer from './components/Footer'
+
+const tabs = [
+  { label: 'Home', component: <Home /> },
+  { label: 'Education', component: <Education /> },
+  { label: 'Work', component: <Work /> },
+  { label: 'Projects', component: <Projects /> },
+]
 
 function App() {
+  const [active, setActive] = useState(0)
+
   return (
-    <Container maxWidth="sm">
-      <Box
-        sx={{
-          my: 8,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: 2,
-        }}
-      >
-        <Typography variant="h2" component="h1" gutterBottom>
-          Hello World
-        </Typography>
-        <Typography variant="body1" color="text.secondary" align="center">
-          A simple site built with Vite, TypeScript, React, and Material UI.
-        </Typography>
-        <Button variant="contained" size="large">
-          Get Started
-        </Button>
-      </Box>
-    </Container>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <CssBaseline />
+      <AppBar position="sticky" color="transparent" elevation={0}>
+        <Toolbar sx={{ justifyContent: 'center', gap: 2 }}>
+          <Tabs
+            value={active}
+            onChange={(_, value: number) => setActive(value)}
+            textColor="primary"
+            slotProps={{ indicator: { sx: { display: 'none' } } }}
+          >
+            {tabs.map((tab) => (
+              <Tab
+                key={tab.label}
+                label={tab.label}
+                sx={{ '&.Mui-selected': { fontWeight: 'bold' } }}
+              />
+            ))}
+          </Tabs>
+        </Toolbar>
+      </AppBar>
+      <Container maxWidth="md" sx={{ py: 6, flexGrow: 1 }}>
+        {tabs[active].component}
+      </Container>
+      <Footer />
+    </Box>
   )
 }
 
