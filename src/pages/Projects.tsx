@@ -44,22 +44,25 @@ const projects: Project[] = [
     tags: ['Go', 'Docker'],
     link: '#',
   },
+]
+
+const open_source: Project[] = [
   {
-    title: 'Project Three',
+    title: 'Project One',
     description: [
       'What this project does.',
       'Why it matters.',
     ],
-    tags: ['Go', 'Docker'],
+    tags: ['React', 'TypeScript'],
     link: '#',
   },
   {
-    title: 'Project Three',
+    title: 'Project Two',
     description: [
       'What this project does.',
       'Why it matters.',
     ],
-    tags: ['Go', 'Docker'],
+    tags: ['Python', 'FastAPI'],
     link: '#',
   },
   {
@@ -72,6 +75,8 @@ const projects: Project[] = [
     link: '#',
   },
 ]
+
+
 
 function ProjectItem({ project }: { project: Project }) {
   return (
@@ -106,7 +111,15 @@ function Projects() {
   return (
     <Box>
       <Typography variant="h3" component="h1" gutterBottom>
-        Projects
+        Open Source Contributions
+      </Typography>
+      <Box sx={{ display: 'grid', gap: 3 }}>
+        {open_source.map((project) => (
+          <ProjectItem key={project.title} project={project} />
+        ))}
+      </Box>
+      <Typography variant="h3" component="h1" gutterBottom>
+        Personal Projects
       </Typography>
       <Box sx={{ display: 'grid', gap: 3 }}>
         {projects.map((project) => (
