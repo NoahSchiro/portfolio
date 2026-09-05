@@ -48,7 +48,17 @@ function App() {
     <ThemeProvider theme={theme}>
       <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <CssBaseline />
-        <AppBar position="sticky" color="transparent" elevation={0}>
+        <AppBar
+          position="sticky"
+          color="transparent"
+          elevation={0}
+          sx={{
+            backgroundColor:
+              mode === 'dark' ? 'rgba(40, 40, 40, 0.85)' : 'rgba(251, 241, 199, 0.85)',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)',
+          }}
+        >
           <Toolbar sx={{ justifyContent: 'center', gap: 2, position: 'relative' }}>
             <Tabs
               value={active}

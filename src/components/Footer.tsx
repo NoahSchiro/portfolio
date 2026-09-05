@@ -18,7 +18,7 @@ function Footer() {
     >
       <Container maxWidth="md">
         <Typography variant="body2" color="text.secondary">
-         Contact information 
+         Contact information:
         </Typography>
         <Stack
           direction="row"

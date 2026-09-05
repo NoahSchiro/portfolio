@@ -65,7 +65,7 @@ const projects: Project[] = [
       'Used the demand forecasts to simulate dynamic pricing based on price elasticity of demand, increasing simulated annual revenue by 58.6% ($6.6 million increase) versus flat pricing despite a 5.1% drop in ridership.',
     ],
     tags: ['Python', 'PyTorch', 'LSTM', 'SQLite', 'MLFlow', 'Time Series Forecasting'],
-    link: 'https://github.com/NoahSchiro',
+    link: 'https://github.com/NoahSchiro/bluebikes',
   },
 ]
 
@@ -157,7 +157,7 @@ function Projects() {
           <ProjectItem key={project.title} project={project} />
         ))}
       </Box>
-      <Typography variant="h3" component="h1" gutterBottom>
+      <Typography variant="h3" component="h1" sx={{ mt: 3}} gutterBottom>
         Personal Projects
       </Typography>
       <Box sx={{ display: 'grid', gap: 3 }}>
