@@ -10,6 +10,7 @@ import Toolbar from '@mui/material/Toolbar'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import { ThemeProvider } from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import Home from './pages/Home'
 import Education from './pages/Education'
@@ -40,6 +41,7 @@ function App() {
         : 'light'
   })
   const theme = useMemo(() => getTheme(mode), [mode])
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   const active = tabs.findIndex((tab) =>
     tab.path === '/' ? location.pathname === '/' : location.pathname.startsWith(tab.path),
@@ -68,11 +70,15 @@ function App() {
             WebkitBackdropFilter: 'blur(8px)',
           }}
         >
-          <Toolbar sx={{ justifyContent: 'center', gap: 2, position: 'relative' }}>
+          <Toolbar
+            sx={{ justifyContent: 'center', gap: 2, position: 'relative', pr: { xs: 7, sm: 0 } }}
+          >
             <Tabs
               value={active === -1 ? false : active}
               onChange={(_, value: number) => navigate(tabs[value].path)}
               textColor="primary"
+              variant={isMobile ? 'scrollable' : 'standard'}
+              scrollButtons={false}
               slotProps={{ indicator: { sx: { display: 'none' } } }}
             >
               {tabs.map((tab) => (
