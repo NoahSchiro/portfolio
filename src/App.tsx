@@ -10,22 +10,27 @@ import Toolbar from '@mui/material/Toolbar'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import { ThemeProvider } from '@mui/material/styles'
+import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import Home from './pages/Home'
 import Education from './pages/Education'
 import Work from './pages/Work'
 import Projects from './pages/Projects'
+import Blog from './pages/Blog'
+import BlogPost from './pages/BlogPost'
 import Footer from './components/Footer'
 import { getTheme, type ThemeMode } from './theme'
 
 const tabs = [
-  { label: 'Home', component: <Home /> },
-  { label: 'Education', component: <Education /> },
-  { label: 'Work', component: <Work /> },
-  { label: 'Projects', component: <Projects /> },
+  { label: 'Home', path: '/' },
+  { label: 'Education', path: '/education' },
+  { label: 'Work', path: '/work' },
+  { label: 'Projects', path: '/projects' },
+  { label: 'Blog', path: '/blog' },
 ]
 
 function App() {
-  const [active, setActive] = useState(0)
+  const location = useLocation()
+  const navigate = useNavigate()
   const [mode, setMode] = useState<ThemeMode>(() => {
     const saved = localStorage.getItem('theme-mode')
     return saved === 'light' || saved === 'dark'
@@ -35,6 +40,10 @@ function App() {
         : 'light'
   })
   const theme = useMemo(() => getTheme(mode), [mode])
+
+  const active = tabs.findIndex((tab) =>
+    tab.path === '/' ? location.pathname === '/' : location.pathname.startsWith(tab.path),
+  )
 
   const toggleMode = () => {
     setMode((prev) => {
@@ -61,8 +70,8 @@ function App() {
         >
           <Toolbar sx={{ justifyContent: 'center', gap: 2, position: 'relative' }}>
             <Tabs
-              value={active}
-              onChange={(_, value: number) => setActive(value)}
+              value={active === -1 ? false : active}
+              onChange={(_, value: number) => navigate(tabs[value].path)}
               textColor="primary"
               slotProps={{ indicator: { sx: { display: 'none' } } }}
             >
@@ -84,7 +93,15 @@ function App() {
           </Toolbar>
         </AppBar>
         <Container maxWidth="md" sx={{ py: 6, flexGrow: 1 }}>
-          {tabs[active].component}
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/education" element={<Education />} />
+            <Route path="/work" element={<Work />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
         </Container>
         <Footer />
       </Box>

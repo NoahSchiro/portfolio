@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 
-const about_me: string = 'I work at MITRE as an ML researcher. This fall, I am starting a M.S. in Data Science at Harvard and doing research on few-shot learning in robotics.';
+const about_me: string = 'I work at MITRE Labs as an ML researcher. This fall, I am starting a M.S. in Data Science at Harvard and doing research on few-shot learning in robotics.';
 
 const emails = [
   { label: 'noahschiro@g.harvard.edu', href: 'mailto:noahschiro@g.harvard.edu', use_case: 'Research (general)'},
