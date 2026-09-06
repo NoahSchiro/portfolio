@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useLayoutEffect, useMemo, useState } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
@@ -28,6 +28,14 @@ const tabs = [
   { label: 'Projects', path: '/projects' },
   { label: 'Blog', path: '/blog' },
 ]
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
+}
 
 function App() {
   const location = useLocation()
@@ -59,6 +67,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <CssBaseline />
+        <ScrollToTop />
         <AppBar
           position="sticky"
           color="transparent"
