@@ -2,6 +2,7 @@ export interface BlogPost {
   slug: string
   title: string
   date: string
+  readingTime: number
   content: string
 }
 
@@ -30,6 +31,16 @@ function parseFrontmatter(raw: string): { data: Record<string, string>; content:
   return { data, content: raw.slice(match[0].length) }
 }
 
+const WORDS_PER_MINUTE = 200
+
+function getReadingTime(content: string): number {
+  const words = content
+    .replace(/```[\s\S]*?```/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean).length
+  return Math.max(1, Math.ceil(words / WORDS_PER_MINUTE))
+}
+
 export const posts: BlogPost[] = Object.entries(files)
   .map(([path, raw]) => {
     const slug = path.slice(path.lastIndexOf('/') + 1).replace(/\.md$/, '')
@@ -38,6 +49,7 @@ export const posts: BlogPost[] = Object.entries(files)
       slug,
       title: data.title || slug,
       date: data.date || '',
+      readingTime: getReadingTime(content),
       content,
     }
   })

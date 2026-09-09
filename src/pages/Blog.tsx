@@ -32,7 +32,9 @@ function Blog() {
                 {post.title}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {formatDate(post.date)}
+                {[formatDate(post.date), `~ ${post.readingTime} min read`]
+                  .filter(Boolean)
+                  .join(' | ')}
               </Typography>
             </Paper>
           ))}
