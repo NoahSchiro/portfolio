@@ -1,0 +1,34 @@
+name: debug-oidc
+
+on:
+  push:
+    branches: ["**"]
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show token request URL
+        run: echo "$ACTIONS_ID_TOKEN_REQUEST_URL"
+
+      - name: Print OIDC token claims
+        run: |
+          TOKEN=$(curl -sH "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com" | jq -r .value)
+          python3 -c "import sys,json,base64; p=sys.argv[1].split('.')[1]; p+='='*(-len(p)%4); c=json.loads(base64.urlsafe_b64decode(p)); print(json.dumps({k:c.get(k) for k in ('iss','aud','sub','exp')}, indent=2))" "$TOKEN"
+          echo "TOKEN=$TOKEN" >> "$GITHUB_ENV"
+
+      - name: Raw STS call with that token
+        run: |
+          aws sts assume-role-with-web-identity \
+            --role-arn arn:aws:iam::638663821156:role/portfolio-deploy \
+            --role-session-name debug-oidc \
+            --web-identity-token "$TOKEN" \
+            --query 'AssumedRoleUser' --output text \
+          && echo "RAW STS CALL SUCCEEDED" \
+          || echo "RAW STS CALL FAILED — see exact error above"
