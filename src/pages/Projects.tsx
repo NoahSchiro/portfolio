@@ -18,6 +18,19 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: 'Gaze Maze — Webcam Gaze-Controlled Game with a Full ML-to-Production Pipeline',
+    description: [
+      'Built a game where players steer a character through a randomly generated maze using only their eyes. The entire gaze pipeline runs client-side in the browser (WASM), so no video, landmarks, or gaze data ever leave the user’s device.',
+      'Collaborated with a team of 5 group members on this project; coordinating through GitHub issues and PRs.',
+      'Training used subject-disjoint splits with per-participant error reporting, GPU-side augmentation, cosine LR scheduling, ablation flags, Weights & Biases tracking, and ONNX export. Achieved ~2% mean error as a fraction of screen size on held-out subjects, which matches the literature.',
+      'Ported the Python preprocessing to TypeScript and run inference with onnxruntime-web.',
+      'Deployed on a serverless architecture: model training runs as containerized Cloud Run Jobs and the static frontend is served from a lightweight nginx container on Cloud Run.',
+      'Enforced quality with GitHub Actions CI running mypy, ruff, and pytest (70% coverage gate) for the model, Vitest for the UI, and Docker image builds, all orchestrated locally with Docker Compose.',
+    ],
+    tags: ['Python', 'PyTorch', 'TypeScript', 'React', 'ONNX', 'MediaPipe', 'OpenCV', 'Docker', 'GCP', 'Cloud Run', 'GitHub Actions'],
+    link: 'https://github.com/NoahSchiro/ac215_pavlos_dogs',
+  },
+  {
     title: 'gloc — CI tool for PRs',
     description: [
       'Created a CLI tool which checks source code churn between two git hashes which ignoring formatting, test, and comment changes. Automatically generates a report and issues a warning if a PR has changes above a certain threshold.',

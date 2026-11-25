@@ -20,7 +20,9 @@ const education: EducationEntry[] = [
     degree: 'M.S. in Data Science',
     period: 'Sep. 2026 - May 2028',
     details: [
-      'First semester currently underway.'
+      'Studying learned control methods for robotic manipulation.',
+      'Implemented methods of operationalizing machine learning services with cloud services (GCP & AWS).',
+      'Coursework studying on classical ML methods (linear/logistic regression, decision trees, random forest, etc.)',
     ],
     coursework: [
       'Robotic Manipulation @ MIT',
