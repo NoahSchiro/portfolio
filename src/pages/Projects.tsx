@@ -18,6 +18,16 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: 'gloc — CI tool for PRs',
+    description: [
+      'Created a CLI tool which checks source code churn between two git hashes which ignoring formatting, test, and comment changes. Automatically generates a report and issues a warning if a PR has changes above a certain threshold.',
+      'Used to keep PRs small, modular, and reviewable.',
+      'Published through crates.io.',
+    ],
+    tags: ['Rust', 'CI', 'Quality Check',],
+    link: 'https://github.com/NoahSchiro/gloc-diff',
+  },
+  {
     title: 'Aleph — Book Recommendation System',
     description: [
       'Built a production-grade recommendation system on the Goodreads dataset (~876K users, ~2.36M books, ~100M interactions), comparing a BPR matrix factorization baseline against a Two-Tower neural network with in-batch sampled softmax; best model reached Recall@10 = 0.831 and NDCG@10 = 0.700.',
@@ -66,6 +76,15 @@ const projects: Project[] = [
     ],
     tags: ['Python', 'PyTorch', 'LSTM', 'SQLite', 'MLFlow', 'Time Series Forecasting'],
     link: 'https://github.com/NoahSchiro/bluebikes',
+  },
+  {
+    title: 'osmgraph — Rust Library for Converting OpenStreetMap Data into Routable Graphs',
+    description: [
+      'Designed and published an open-source Rust crate on crates.io (6 releases, v0.1–v0.4) that queries the OpenStreetMap Overpass API and converts the JSON response into a graph of nodes and edges for use in routing and graph algorithms.',
+      'Maintained the library with an integration test suite for the Overpass API and graph construction, Criterion benchmarks, and a CI pipeline. Shipped examples covering A* routing, place and polyline queries, and graph serialization.',
+    ],
+    tags: ['Rust', 'Graph Algorithms', 'A* Search', 'OpenStreetMap', 'REST APIs'],
+    link: 'https://github.com/NoahSchiro/osmgraph',
   },
 ]
 
